@@ -20,8 +20,6 @@ function basket(long) {
         end = '';
     } else if (((long.length % 10 > 1) && (long.length % 10 < 5)) && ((long.length % 100 < 12) || (long.length % 100 > 14))){
         end = 'а';
-    } else if (long.length === (12 || 13 || 14)){
-        end = 'ов';
     } else {
         end = 'ов';
     }
