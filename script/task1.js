@@ -9,7 +9,7 @@
 // 3. Браузер проверяет число и возвращает результат.
 // 4. Так повторяется до тех пор, пока число не угадают.
 // 5. Как только это случается, браузер сбрасывает количество попыток и генерирует новое число.
-
+"use strict"
 
 let numPC, arrYou, bulls, cows, tr, end, numYou;
 allGame();
@@ -40,14 +40,14 @@ function pcArr() {
 function game() {
     cows = 0;
     bulls = 0;
-    while (tr >= 1) {
+    while (tr > 0) {
         yourArr(numYou);
         checkYouNumb();
-        cows_bulls();
+        cows_bulls(arrYou, numPC);
         if (tr === 1){
             alert('Вы проиграли. Компьютер загадал ' + numPC);
             allGame();
-        } else if (bulls != 4){
+        } else if (bulls !== 4){
             tr = tr - 1;
             numYou = prompt('Количество быков: ' + bulls +
                 ', количество коров: ' + cows + '. У вас осталось ' + tr + ' попыт' + ending(tr) + '. Ваше число: ' + numYou +'. Попробуйте еще раз.');
@@ -63,10 +63,10 @@ function game() {
 }
 
 function ending(e) {
-    if (e >= 5 && e <=9){
+    if (e > 4 && e < 10){
         end = 'ок';
         return end;
-    } else if (e >= 2 && e <= 4){
+    } else if (e > 1 && e < 5){
         end = 'ки';
         return end;
     } else if (e === 1){
@@ -76,10 +76,7 @@ function ending(e) {
 }
 
 function yourArr(p) {
-    for (let i = 0; i < 4; i++){
-        let arrYouNumb = Number(p.substr(i,1));
-        arrYou.push(arrYouNumb);
-    }
+    arrYou = p.split('');
 }
 
 
@@ -93,13 +90,14 @@ function checkYouNumb() {
         }
 }
 
-function cows_bulls() {
+function cows_bulls(y, p) {
     for (let i = 0; i < 4; i++){
-        if (arrYou[i] === numPC [i]){
+        y[i] = Number(y[i]);
+        if (y[i] === p[i]){
             bulls++;
         } else {
             for (let j = 0; j < 4; j++){
-                if (arrYou[i] === numPC [j]){
+                if (y[i] === p[j]){
                     cows++;
                 }
             }
